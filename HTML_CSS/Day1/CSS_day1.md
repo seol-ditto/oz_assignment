@@ -102,6 +102,46 @@ header {
 <p class="centered">...</p>       <!-- class는 여러 곳에 재사용 -->
 ```
 
+- id : 한 페이지에서 유일한 식별자. 같은 id를 두 요소에 쓰면 안 됨
+```html
+<div id="header"></div>
+<p id="header"></p>     <!-- 잘못된 예 : id 중복 -->
+```
+- class : 공통된 특징을 가진 요소들을 묶는 이름. CSS 스타일은 주로 class 기준으로 적용
+
+#### 결합자(관계) 선택자
+| 선택자 | 의미 |
+| --- | --- |
+| `div p` (자손) | div 안에 있는 모든 p (깊이 상관없음) |
+| `div > p` (자식) | div 바로 아래 자식 p만 |
+| `div + p` (인접 형제) | div 바로 다음에 오는 p 하나 |
+| `div ~ p` (일반 형제) | div 뒤에 오는 모든 형제 p |
+
+```html
+<div>
+    <p>A</p>              <!-- div p ○, div > p ○ -->
+    <section>
+        <p>B</p>          <!-- div p ○, div > p X (손자라서) -->
+    </section>
+</div>
+<p>C</p>                  <!-- div + p ○, div ~ p ○ -->
+<p>D</p>                  <!-- div ~ p ○ -->
+```
+- 실습 예 : `#navbar__menu li` → navbar__menu 안의 li들만 선택
+
+#### 속성 선택자
+- `a[href]` : href 속성을 가진 a 태그
+- `input[type="text"]` : type이 "text"인 input 태그
+
+#### 가상 클래스(pseudo-class) 선택자
+요소의 **상태**를 기준으로 선택
+- `:hover` : 마우스를 올렸을 때
+- `:focus` : 요소가 포커스를 가졌을 때 (입력칸을 클릭해서 커서가 깜빡일 때 등)
+- `:active` : 요소를 클릭하고 있는 순간
+- `:nth-child(n)` : 부모 기준으로 n번째 자식 (`:nth-child(2)`, `:nth-child(odd)` 등)
+
+선택자 연습 사이트 : CSS Diner (https://flukeout.github.io/)
+
 ---
 ### selector의 우선순위
 위로 갈수록 강함
@@ -167,6 +207,16 @@ body { color: palevioletred; }
     - 단위 : `20px` 등
 - `font-weight` : 글자 굵기 (`bold`, `400` 등)
 - `font-family` : 글꼴
+    - 예 : `font-family: 'Times New Roman', Times, serif;`
+- `font` : 글자 속성을 한 줄로 줄여 쓰기
+    - 순서 : font-weight → font-size → font-family
+    - font-size와 font-family는 반드시 포함해야 함
+```css
+header {
+    font: bold x-large 'Times New Roman', Times, serif;
+}
+```
+- `background-color` : 배경색
 - `text-align` : 정렬 (`center`, `left`, `right`)
     - 블록 요소에 주면 그 안의 글자와 인라인 요소들이 정렬됨
 - `text-decoration` : 밑줄 등 (`none`, `underline`)
@@ -196,6 +246,28 @@ HTML 특수문자
 
 - margin, border, padding은 기본적으로 설정하지 않으면 나타나지 않음 (단, 일부 태그는 브라우저 기본 margin이 있음. 예 : `<p>`, `<body>`)
 - `background-color`는 content + padding 영역까지 칠해짐. margin은 투명
+
+#### 박스의 실제 크기와 box-sizing
+```css
+.box {
+    width: 100px;
+    padding: 50px;
+    border: 5px solid black;
+    margin: 20px;
+}
+```
+- 가로 길이를 100px로 기대했지만 실제로 화면에서 차지하는 크기는
+    - 100(width) + 50×2(padding) + 5×2(border) = **210px**
+- 기본값 `box-sizing: content-box;` 에서는 width가 **content만의 크기**이기 때문
+- 그래서 실무에서는 보통 맨 위에 이렇게 써둠
+```css
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+```
+- `border-box` : width에 padding과 border까지 포함 → width: 100px이면 화면에서도 100px
+- `::before`, `::after`는 가상 요소. 전체 요소와 가상 요소까지 같은 기준으로 계산되게 함
+- 이런 초기화 용도가 `*` 선택자의 대표적인 쓰임
 
 #### content 크기
 - 블록 요소의 기본 높이 : 안의 내용(글자 크기)만큼
@@ -227,6 +299,10 @@ padding: 10px 20px 30px 40px;   /* 위 오른쪽 아래 왼쪽 */
 ```
 - margin도 똑같은 규칙
 - `margin: 0 auto;` + `width` 지정 → 블록 요소를 가로 가운데 정렬
+
+실습하며 주의할 점
+- 속성 이름 오타는 에러 없이 그냥 무시됨 (예 : `padding-botton` → 적용 안 됨)
+- VS Code에서 속성 이름이 다른 색으로 보이거나 밑줄이 생기면 오타 의심
 
 ---
 ### Block / Inline
