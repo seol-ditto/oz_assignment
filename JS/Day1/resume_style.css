@@ -1,0 +1,742 @@
+/* ===== 이력서 외부 CSS (External CSS) - 블루그레이 버전 =====
+   포인트 컬러 팔레트
+   #AED2FC (가장 연한 하늘색) / #96B5D9 / #7993B0 / #5D7187 / #414F5E (가장 진한 남색)
+
+   [Day 1] 선택자 · 상속 · 박스 모델 · inline/block · 외부 CSS
+   [Day 2] Flexbox · Position · Media Query · Navbar
+   [Day 3] Grid · grid-template-areas · :not(:hover) · 모달(팝업)
+   [JS]    다크 모드 · 메뉴 강조 · GitHub 저장소 · 연락하기 폼 · 알림
+
+   색상은 CSS 변수(--이름)로 한 곳에 모아 둠
+   → body에 dark 클래스가 붙으면 변수 값만 바뀌어서 화면 전체 색이 한 번에 바뀜 */
+
+:root {
+    --bg: #f3f5f8;            /* 페이지 바깥 배경 */
+    --paper: #ffffff;         /* 이력서 종이, 카드 배경 */
+    --text: #414F5E;          /* 기본 글자 (가장 진한 남색) */
+    --text-sub: #5D7187;      /* 보조 글자 */
+    --accent: #7993B0;        /* 아이콘, 날짜 */
+    --line-accent: #96B5D9;   /* 강조 선, 태그 테두리 */
+    --line: #e1e6ec;          /* 옅은 구분선 */
+    --soft: #f5f9fe;          /* 옅은 배경 박스 */
+    --soft-strong: #AED2FC;   /* hover 배경 (가장 연한 하늘색) */
+    --danger: #c0564b;
+    --ok: #3f8a5f;
+}
+
+/* [JS] 다크 모드 : body.dark 일 때 변수 값만 바꿔치기 */
+body.dark {
+    --bg: #1b2129;
+    --paper: #242c35;
+    --text: #e4eaf1;
+    --text-sub: #b3c0cf;
+    --accent: #96B5D9;
+    --line-accent: #5D7187;
+    --line: #36414d;
+    --soft: #2d3743;
+    --soft-strong: #41546a;
+    --danger: #ef8f86;
+    --ok: #7fcf9f;
+}
+
+/* 전체 선택자(*): 모든 태그에 차분한 고딕체 하나만 사용 */
+* {
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+/* 메뉴를 누르면 해당 섹션으로 부드럽게 스크롤 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 태그 선택자: body
+   여기서 지정한 color는 자식 요소들에게 상속(Inheritance)됨 */
+body {
+    margin: 0;
+    padding-top: 3.4rem;         /* [Day 2] 위에 고정된 navbar 높이만큼 본문을 내려줌 */
+    background-color: var(--bg);
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.75;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* ===== [Day 2] Navbar : position fixed + flex ===== */
+#navbar {
+    position: fixed;             /* 스크롤해도 화면 맨 위에 붙어 있음 */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;                 /* 다른 요소들보다 위에 보이게 */
+    background-color: var(--paper);
+    border-bottom: 1px solid var(--line);
+}
+
+#navbar__inner {
+    max-width: 870px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    height: 3.4rem;
+
+    display: flex;
+    justify-content: space-between;   /* 로고는 왼쪽, 메뉴는 오른쪽 끝으로 */
+    align-items: center;              /* 교차축(세로) 가운데 정렬 */
+}
+
+#navbar__logo {
+    font-weight: bold;
+    color: var(--text);
+}
+
+#navbar__logo i {
+    color: var(--accent);
+    margin-right: 0.4rem;
+}
+
+#navbar__menu {
+    display: flex;
+    gap: 0.2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.85rem;
+}
+
+#navbar__menu a {
+    display: block;
+    padding: 0.3rem 0.7rem;
+    border-radius: 0.4rem;
+    color: var(--text-sub);
+}
+
+#navbar__menu a:hover {
+    background-color: var(--soft);
+    color: var(--text);
+    text-decoration: none;
+}
+
+/* id 선택자(#): 이력서 전체를 감싸는 종이 박스
+   박스 모델: width(content) → padding → border → margin */
+#resume {
+    max-width: 870px;
+    min-height: 100vh;
+    margin: 0 auto;              /* 상하 0, 좌우 auto → 가운데 정렬 */
+    padding: 0 0 2rem 0;
+    background-color: var(--paper);
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+}
+
+/* ----- header -----
+   진한 배경 대신 흰 바탕 + 위쪽 굵은 선 + 아래쪽 얇은 선으로 정돈된 느낌 */
+header {
+    text-align: left;
+    padding: 2.8rem 2.5rem 1.6rem 2.5rem;
+    border-top: 6px solid var(--text);
+    border-bottom: 1px solid var(--line-accent);
+}
+
+#name {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    margin: 0;
+    color: var(--text);
+}
+
+#job-title {
+    margin: 0.2rem 0 1rem 0;
+    font-size: 1rem;
+    color: var(--text-sub);
+}
+
+/* [Day 2] 연락처 줄 : flex + gap으로 간격을 한 번에 지정, 좁으면 다음 줄로 */
+#contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.4rem;          /* 위아래 0.4rem, 좌우 1.4rem */
+}
+
+.contact {
+    font-size: 0.85rem;
+    color: var(--text-sub);
+}
+
+.contact i {
+    color: var(--accent);
+    margin-right: 0.35rem;       /* 아이콘과 글자 사이 여백 */
+}
+
+/* 속성 선택자([href]): href 속성을 가진 a 태그만 선택 */
+a[href] {
+    color: inherit;              /* 부모 색을 그대로 상속 */
+    text-decoration: none;
+}
+
+/* 가상 클래스(:hover): 마우스를 올렸을 때 */
+a[href]:hover {
+    text-decoration: underline;
+    color: var(--text);
+}
+
+/* ----- main ----- */
+main {
+    padding: 0 2.5rem;
+}
+
+/* 섹션 하나하나: section은 block 요소라서 위아래로 쌓임 */
+section {
+    margin-top: 2.2rem;
+    scroll-margin-top: 4.5rem;   /* 메뉴로 이동했을 때 고정 navbar에 제목이 가려지지 않게 */
+}
+
+/* class 선택자(.): 섹션 제목 */
+.section-title {
+    font-size: 1.05rem;
+    font-weight: bold;
+    letter-spacing: 0.05rem;
+    color: var(--text);
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.35rem;
+    border-bottom: 2px solid var(--text);
+}
+
+.section-title i {
+    color: var(--accent);
+    margin-right: 0.45rem;
+}
+
+/* 자기소개 박스 */
+#about p {
+    margin: 0;
+    padding: 1rem 1.2rem;
+    background-color: var(--soft);
+    border-left: 3px solid var(--accent);
+}
+
+/* 경력·교육 항목 */
+.item {
+    margin-bottom: 1.6rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--line);
+}
+
+.item:hover {
+    border-left: 2px solid var(--line-accent);   /* 마우스 올리면 왼쪽 선만 은은하게 */
+}
+
+/* [Day 2] 제목은 왼쪽, 날짜는 오른쪽 끝 : flex + space-between */
+.item-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;            /* 글자 크기가 달라도 글자 밑선을 맞춤 */
+    gap: 1rem;
+}
+
+.item-title {
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.item-date {
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: var(--accent);
+    white-space: nowrap;              /* 날짜가 중간에 줄바꿈되지 않게 */
+}
+
+.item-sub {
+    margin: 0 0 0.4rem 0;
+    color: var(--text-sub);
+    font-size: 0.88rem;
+}
+
+.item ul {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+.item li {
+    margin-bottom: 0.2rem;
+}
+
+/* li 안에 들어 있는 ul만 선택 (한 단계 들여쓴 목록) */
+.item li ul {
+    padding-left: 1rem;
+    font-size: 0.88rem;
+    color: var(--text-sub);
+}
+
+/* ===== [Day 3] 프로젝트 : Grid + grid-template-areas ===== */
+.project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;   /* 1:1 두 칸 */
+    gap: 1rem;
+    grid-template-areas:
+        "xray   xray"
+        "ulcer  screen"
+        "ivf    smoke";
+}
+
+.p-xray   { grid-area: xray; }
+.p-ulcer  { grid-area: ulcer; }
+.p-screen { grid-area: screen; }
+.p-ivf    { grid-area: ivf; }
+.p-smoke  { grid-area: smoke; }
+
+/* 카드 하나 : 안쪽은 flex 세로 배치 → 버튼을 항상 카드 맨 아래로 */
+.card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.1rem 1.2rem;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--line-accent);
+    border-radius: 0.5rem;
+    background-color: var(--paper);
+    transition: opacity 0.2s, filter 0.2s, border-color 0.2s;
+}
+
+.card:hover {
+    border-top-color: var(--text);
+}
+
+/* [Day 3] gallery에서 배운 효과 : 하나에 마우스를 올리면 나머지 카드는 흐리게 */
+.project-grid:hover .card:not(:hover) {
+    opacity: 0.55;
+    filter: grayscale(1);
+}
+
+.card-title {
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.card-label {
+    font-size: 0.78rem;
+    color: var(--accent);
+    margin: 0.1rem 0 0.6rem 0;
+}
+
+.card ul {
+    flex: 1;                          /* 남는 세로 공간을 목록이 차지 → 버튼이 아래로 밀림 */
+    margin: 0 0 0.8rem 0;
+    padding-left: 1.1rem;
+    font-size: 0.88rem;
+}
+
+.card li {
+    margin-bottom: 0.2rem;
+}
+
+.card-btn {
+    align-self: flex-start;           /* 버튼은 왼쪽에 내용 크기만큼만 */
+    font-size: 0.8rem;
+    color: var(--text-sub);
+    background-color: var(--soft);
+    border: 1px solid var(--line-accent);
+    border-radius: 0.4rem;
+    padding: 0.25rem 0.8rem;
+    cursor: pointer;
+}
+
+.card-btn:hover {
+    background-color: var(--soft-strong);
+    color: var(--text);
+}
+
+/* ===== [Day 3] 모달 : popover 속성으로 띄우는 상세 설명 창 ===== */
+.modal {
+    width: min(640px, 90vw);
+    max-height: 80vh;
+    padding: 1.6rem 1.8rem;
+    border: none;
+    border-top: 5px solid var(--text);
+    border-radius: 0.6rem;
+    color: var(--text);
+    line-height: 1.75;
+}
+
+/* 모달 뒤 화면을 어둡게 덮는 배경 */
+.modal::backdrop {
+    background-color: rgba(65, 79, 94, 0.45);
+}
+
+.modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 1.15rem;
+}
+
+.modal-label {
+    margin: 0.1rem 0 0 0;
+    font-size: 0.8rem;
+    color: var(--accent);
+}
+
+.modal-close {
+    font-size: 1.1rem;
+    color: var(--accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    color: var(--text);
+}
+
+.modal ul {
+    margin: 0 0 1rem 0;
+    padding-left: 1.2rem;
+}
+
+.modal li {
+    margin-bottom: 0.4rem;
+}
+
+.modal-tech {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--text-sub);
+}
+
+/* ===== 기술 스택 ===== */
+/* [Day 2] 라벨 + 태그들을 한 줄로, 넘치면 다음 줄로 */
+.skill-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0 0 0.7rem 0;
+}
+
+.skill-label {
+    width: 5.5rem;                    /* 라벨 폭을 고정해서 태그 시작 위치를 맞춤 */
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: var(--text-sub);
+}
+
+/* 기술 스택 태그 */
+.skill {
+    font-size: 0.82rem;
+    color: var(--text);
+    background-color: var(--soft);
+    border: 1px solid var(--line-accent);
+    border-radius: 0.4rem;
+    padding: 0.1rem 0.65rem;
+}
+
+.skill:hover {
+    background-color: var(--soft-strong);
+}
+
+/* ----- footer ----- */
+footer {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--line-accent);
+    margin-top: 3rem;
+}
+
+/* ===== [Day 2] 맨 위로 버튼 : position fixed ===== */
+#to-top {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    width: 2.6rem;
+    height: 2.6rem;
+
+    display: flex;                    /* 화살표를 버튼 정가운데에 */
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    background-color: #5D7187;
+    border-radius: 50%;               /* 동그라미 */
+
+    /* [JS] 처음엔 숨겨두고, 스크롤을 내리면 show 클래스가 붙어서 나타남 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+}
+
+#to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#to-top:hover {
+    background-color: #414F5E;
+    color: white;
+    text-decoration: none;
+}
+
+/* ===== [Day 2] Media Query : 화면이 좁을 때(휴대폰) ===== */
+@media (max-width: 640px) {
+    #navbar__inner,
+    header,
+    main {
+        padding-left: 1.2rem;
+        padding-right: 1.2rem;
+    }
+
+    #navbar__logo {
+        display: none;                /* 좁은 화면에서는 로고 숨기고 메뉴만 */
+    }
+
+    #navbar__menu {
+        flex: 1;
+        justify-content: space-between;
+    }
+
+    #navbar__menu a {
+        padding: 0.3rem 0.4rem;
+    }
+
+    /* 제목과 날짜를 위아래로 */
+    .item-head {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    /* 프로젝트 카드 한 줄에 하나씩 */
+    .project-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "xray"
+            "ulcer"
+            "screen"
+            "ivf"
+            "smoke";
+    }
+
+    /* 메뉴가 길어지면 옆으로 밀어서 보기 */
+    #navbar__menu {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    #contact-foot {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .repos-head {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+/* =====================================================================
+   [JS] 새로 추가한 기능들의 스타일
+   ===================================================================== */
+
+/* ----- 다크 모드 버튼 ----- */
+#theme-toggle {
+    margin-left: 0.6rem;
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;                   /* 공간이 좁아도 버튼은 줄어들지 않게 */
+    color: var(--text-sub);
+    background-color: var(--soft);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#theme-toggle:hover {
+    color: var(--text);
+    border-color: var(--line-accent);
+}
+
+/* 로고·메뉴·버튼을 한 줄에 : 메뉴를 오른쪽으로 밀어줌 */
+#navbar__menu {
+    margin-left: auto;
+}
+
+/* ----- 지금 보고 있는 섹션의 메뉴 강조 (JS가 active 클래스를 붙여줌) ----- */
+#navbar__menu a.active {
+    color: var(--text);
+    font-weight: bold;
+    background-color: var(--soft);
+}
+
+/* ----- GitHub 저장소 ----- */
+#repos {
+    margin-top: 1.6rem;
+}
+
+.repos-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+}
+
+.sub-title {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text);
+}
+
+.sub-title i {
+    color: var(--accent);
+    margin-right: 0.4rem;
+}
+
+#repo-status {
+    font-size: 0.78rem;
+    color: var(--accent);
+}
+
+#repo-list {
+    list-style: none;
+    margin: 0 0 0.8rem 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);     /* [Day 3] 3칸 grid */
+    gap: 0.8rem;
+}
+
+.repo {
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    background-color: var(--soft);
+}
+
+.repo-name {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.repo-desc {
+    margin: 0.2rem 0;
+    font-size: 0.8rem;
+    color: var(--text-sub);
+}
+
+.repo-meta {
+    margin: 0;
+    font-size: 0.72rem;
+    color: var(--accent);
+}
+
+.card-btn:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* ----- 연락하기 폼 ----- */
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    background-color: var(--soft);
+}
+
+#contact-form label {
+    font-size: 0.82rem;
+    font-weight: bold;
+    color: var(--text-sub);
+    margin-top: 0.3rem;
+}
+
+#contact-form input,
+#contact-form textarea {
+    font-size: 0.9rem;
+    color: var(--text);
+    background-color: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 0.4rem;
+    padding: 0.5rem 0.7rem;
+    resize: vertical;                 /* 텍스트 칸은 세로로만 늘릴 수 있게 */
+}
+
+/* 가상 클래스(:focus) : 입력 칸을 클릭했을 때 */
+#contact-form input:focus,
+#contact-form textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+#contact-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.4rem;
+}
+
+#contact-help {
+    margin: 0;
+    font-size: 0.8rem;
+    min-height: 1.4rem;               /* 문구가 없어도 높이를 유지해서 화면이 덜컹거리지 않게 */
+}
+
+/* JS가 검사 결과에 따라 붙여주는 클래스 */
+.help-error {
+    color: var(--danger);
+}
+
+.help-ok {
+    color: var(--ok);
+}
+
+#contact-send {
+    align-self: auto;
+    font-size: 0.85rem;
+    padding: 0.4rem 1rem;
+}
+
+/* ----- 알림(toast) : 화면 아래 가운데에 잠깐 떴다 사라짐 ----- */
+#toast {
+    position: fixed;
+    left: 50%;
+    bottom: 2rem;
+    transform: translate(-50%, 1rem);    /* 가운데 맞추고, 살짝 아래에서 시작 */
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+    color: white;
+    background-color: #414F5E;
+    border-radius: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
+    z-index: 20;
+}
+
+#toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
+/* 모달 배경색도 다크 모드를 따라가게 */
+.modal {
+    background-color: var(--paper);
+}
+
+/* 저장소 카드 : 화면이 좁으면 1칸 */
+@media (max-width: 640px) {
+    #repo-list {
+        grid-template-columns: 1fr;
+    }
+}
