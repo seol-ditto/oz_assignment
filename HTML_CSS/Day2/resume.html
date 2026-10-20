@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume [Seolah kim]</title>
+
+    <!-- 외부 CSS(External CSS) -->
+    <link rel="stylesheet" href="./resume_style.css">
+
+    <!-- Font Awesome 외부 CSS (아이콘) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+    <!-- Google Fonts 외부 CSS (폰트) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Noto+Sans+KR:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="resume">
+        <!-- 이름 + 연락처 -->
+        <header>
+            <h1 id="name">김설아 Seolah Kim</h1>
+            <p id="job-title">AI 헬스케어 개발자</p>
+
+            <span class="contact">
+                <a href="mailto:seol.ditto@gmail.com"><i class="fa-solid fa-envelope"></i>seol.ditto@gmail.com</a>
+            </span>
+            <span class="contact"><i class="fa-solid fa-phone"></i>010-1111-2222</span>
+            <span class="contact">
+                <a href="https://github.com/seol-ditto"><i class="fa-brands fa-github"></i>GitHub</a>
+            </span>
+        </header>
+
+        <main>
+            <!-- 자기소개 -->
+            <section id="about">
+                <h2 class="section-title"><i class="fa-solid fa-user"></i>자기소개</h2>
+                <p>
+                    4년간 순환기내과에서 심전도 분석과 임상시험 데이터 관리를 담당하며, 반복 업무를 직접 자동화해 업무 시간을 줄인 경험이 있습니다.
+                    오즈코딩스쿨 AI 헬스케어 부트캠프에서 파이썬, 데이터 분석, 머신러닝부터 웹 개발까지 차근차근 익히고 있습니다.
+                    <br><strong>임상 현장을 이해하는 개발자</strong>로서, 의료진에게 실제로 도움이 되는 서비스를 만들고자 합니다.
+                </p>
+            </section>
+
+            <!-- 경력 -->
+            <section id="experience">
+                <h2 class="section-title"><i class="fa-solid fa-briefcase"></i>경력</h2>
+
+                <div class="item">
+                    <p class="item-title">고려대학교 구로병원 순환기내과 임상연구코디네이터(CRC)<span class="item-date">2024.04 ~
+                            2026.04</span></p>
+                    <p class="item-sub">의약품 임상시험 코디네이터</p>
+                    <ul>
+                        <li>EMR 열람을 통한 임상시험 대상자 프리스크리닝 (진단명 · 투약이력 · 검사이력 확인)</li>
+                        <li>임상시험 데이터 수집 및 EDC 입력, 쿼리 대응</li>
+                        <li>구글 스프레드시트로 환자 관리·프리스크리닝 시트를 직접 만들어 업무 시간 단축</li>
+                    </ul>
+                </div>
+
+                <div class="item">
+                    <p class="item-title">서울중앙의료의원 순환기내과 임상병리사<span class="item-date">2022.01 ~ 2024.02</span></p>
+                    <p class="item-sub">심장 기능 검사</p>
+                    <ul>
+                        <li>TMT(운동부하검사), EKG(심전도), ECHO(심장초음파) 검사</li>
+                        <li>Holter 및 S-Patch(3일 부착형 심전도) 검사 파형 분석
+                            <ul>
+                                <li>AI로 자동 판독된 AFib · P파 · QRS 등 파형의 오매칭 수정</li>
+                            </ul>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 교육 -->
+            <section id="education">
+                <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i>교육</h2>
+
+                <div class="item">
+                    <p class="item-title">오즈코딩스쿨 AI 헬스케어 초격차 캠프<span class="item-date">2026.07 ~</span></p>
+                    <p class="item-sub">데이터 분석 · 머신러닝 · 딥러닝 · 웹 개발</p>
+                </div>
+
+                <div class="item">
+                    <p class="item-title">을지대학교 성남캠퍼스 임상병리학과<span class="item-date"> 2022.02 졸업</span></p>
+                </div>
+            </section>
+
+            <!-- 프로젝트 -->
+            <section id="projects">
+                <h2 class="section-title"><i class="fa-solid fa-flask"></i>프로젝트</h2>
+                <div class="item">
+                    <p class="item-title">흉부 X-ray 폐렴 분류 모델<span class="item-date">2026.10 · DACON 해커톤 · 개인 2위</span>
+                    </p>
+                    <ul>
+                        <li>검증 0.99와 리더보드 0.85의 격차를 추적해, 학습 이미지에만 있던 검은 띠가 교란 특징임을 발견</li>
+                        <li>폐 영역만 잘라 학습하도록 입력을 바꿔 리더보드 0.71 → 0.96 달성 (CNN 3종 앙상블, Grad-CAM 검증)</li>
+                    </ul>
+                </div>
+
+                <div class="item">
+                    <p class="item-title">욕창 멀티모달 관리 서비스<span class="item-date">2026.10 · 부트캠프 미니 프로젝트 · 6인 팀장</span>
+                    </p>
+                    <ul>
+                        <li>사진·체크항목·기록을 결합한 욕창 조기 선별 및 기록 보조 서비스 기획, 프로토타입 구현</li>
+                        <li>특성요인도·데이터 수집성 평가·변수 정의서 작성, 팀원별 초안을 취합해 보고서와 발표 완성</li>
+                    </ul>
+                </div>
+
+                <div class="item">
+                    <p class="item-title">임상시험 프리스크리닝 자동화<span class="item-date">2026.09 · 원티드 AI 해커톤 · AI builder
+                            배지</span></p>
+                    <ul>
+                        <li>CRC 실무에서 환자당 3~10분 걸리던 EMR 수기 선별을 자동화하는 프로토타입 개발</li>
+                        <li>나이·eGFR 등 수치 기준은 규칙 기반 조건식으로, 판독문·메모는 LLM으로 판정하고 애매하면 '보류'로 넘기는 구조 설계</li>
+                    </ul>
+                </div>
+
+                <div class="item">
+                    <p class="item-title">난임 데이터 기반 임신 성공 예측 모델<span class="item-date">2026.09 · DACON 해커톤 · 팀 3위</span>
+                    </p>
+                    <ul>
+                        <li>시술 과정 변수 전처리 담당, 직접 설계한 파생변수 2개가 SHAP 핵심 변수 상위 5개에 포함</li>
+                        <li>성능 정체 원인이 통합 코드의 담당 파트 누락임을 찾아 복원 및 파생변수 보강</li>
+                    </ul>
+                </div>
+
+                <div class="item">
+                    <p class="item-title">흡연 여부 데이터 분석을 통한 건강 인사이트 도출<span class="item-date">2026.08 · 부트캠프 미니 프로젝트 · 4인
+                            팀장</span></p>
+                    <ul>
+                        <li>건강검진 데이터로 흡연 여부에 따른 건강 지표 차이 분석, 단변량·이변량 분석 담당</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 기술 스택 -->
+            <section id="skills">
+                <h2 class="section-title"><i class="fa-solid fa-code"></i>기술 스택</h2>
+
+                <p class="skill-group">
+                    <span class="skill-label">Language</span>
+                    <span class="skill">Python</span>
+                    <span class="skill">SQL</span>
+                    <span class="skill">HTML</span>
+                    <span class="skill">CSS</span>
+                </p>
+                <p class="skill-group">
+                    <span class="skill-label">Data</span>
+                    <span class="skill">pandas</span>
+                    <span class="skill">scikit-learn</span>
+                </p>
+                <p class="skill-group">
+                    <span class="skill-label">Tool</span>
+                    <span class="skill">Git</span>
+                    <span class="skill">GitHub</span>
+                    <span class="skill">Google Sheets</span>
+                </p>
+            </section>
+        </main>
+
+        <!-- 인라인 스타일(inline style)은 우선순위가 가장 높아서 CSS 파일의 footer 색보다 먼저 적용됨 -->
+        <footer>Copyright &#169; 김설아</footer>
+    </div>
+</body>
+
+</html>

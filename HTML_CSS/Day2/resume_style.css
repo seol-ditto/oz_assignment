@@ -1,0 +1,190 @@
+/* ===== 이력서 외부 CSS (External CSS) - 블루그레이 버전 =====
+   포인트 컬러 팔레트
+   #AED2FC (가장 연한 하늘색) / #96B5D9 / #7993B0 / #5D7187 / #414F5E (가장 진한 남색) */
+
+/* 전체 선택자(*): 모든 태그에 차분한 고딕체 하나만 사용 */
+* {
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+/* 태그 선택자: body
+   여기서 지정한 color는 자식 요소들에게 상속(Inheritance)됨 */
+body {
+    margin: 0;
+    background-color: #f3f5f8;
+    color: #414F5E;
+    font-size: 0.95rem;
+    line-height: 1.75;
+}
+
+/* id 선택자(#): 이력서 전체를 감싸는 종이 박스
+   박스 모델: width(content) → padding → border → margin */
+#resume {
+    max-width: 870px;
+    min-height: 100vh;
+    margin: 0 auto;              /* 상하 0, 좌우 auto → 가운데 정렬 */
+    padding: 0 0 2rem 0;
+    background-color: white;
+    border-left: 1px solid #e1e6ec;
+    border-right: 1px solid #e1e6ec;
+}
+
+/* ----- header -----
+   진한 배경 대신 흰 바탕 + 위쪽 굵은 선 + 아래쪽 얇은 선으로 정돈된 느낌 */
+header {
+    text-align: left;
+    padding: 2.8rem 2.5rem 1.6rem 2.5rem;
+    border-top: 6px solid #414F5E;
+    border-bottom: 1px solid #96B5D9;
+}
+
+#name {
+    font-family: "Noto Sans KR", sans-serif;   /* 동글한 폰트 대신 본문과 같은 고딕체 */
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    margin: 0;
+    color: #414F5E;
+}
+
+#job-title {
+    margin: 0.2rem 0 1rem 0;
+    font-size: 1rem;
+    color: #5D7187;
+}
+
+/* 연락처: span은 inline 요소라서 한 줄에 나란히 배치됨 */
+.contact {
+    font-size: 0.85rem;
+    color: #5D7187;
+    margin: 0 1.2rem 0 0;
+}
+
+.contact i {
+    color: #7993B0;
+    margin-right: 0.35rem;       /* 아이콘과 글자 사이 여백 */
+}
+
+/* 속성 선택자([href]): href 속성을 가진 a 태그만 선택 */
+a[href] {
+    color: inherit;              /* 부모 색을 그대로 상속 */
+    text-decoration: none;
+}
+
+/* 가상 클래스(:hover): 마우스를 올렸을 때 */
+a[href]:hover {
+    text-decoration: underline;
+    color: #414F5E;
+}
+
+/* ----- main ----- */
+main {
+    padding: 0 2.5rem;
+}
+
+/* 섹션 하나하나: section은 block 요소라서 위아래로 쌓임 */
+section {
+    margin-top: 2.2rem;
+}
+
+/* class 선택자(.): 섹션 제목 */
+.section-title {
+    font-size: 1.05rem;
+    font-weight: bold;
+    letter-spacing: 0.05rem;
+    color: #414F5E;
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.35rem;
+    border-bottom: 2px solid #414F5E;
+}
+
+.section-title i {
+    color: #7993B0;
+    margin-right: 0.45rem;
+}
+
+/* 자기소개 박스 */
+#about p {
+    margin: 0;
+    padding: 1rem 1.2rem;
+    background-color: #f5f9fe;
+    border-left: 3px solid #7993B0;
+}
+
+/* 경력·교육 항목 */
+.item {
+    margin-bottom: 1.4rem;
+    padding-left: 1rem;
+    border-left: 2px solid #e1e6ec;
+}
+
+.item:hover {
+    border-left: 2px solid #96B5D9;   /* 마우스 올리면 왼쪽 선만 은은하게 */
+}
+
+.item-title {
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* inline 요소인 span: 제목 옆에 같은 줄로 붙음 */
+.item-date {
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: #7993B0;
+    margin-left: 0.5rem;
+}
+
+.item-sub {
+    margin: 0 0 0.4rem 0;
+    color: #5D7187;
+    font-size: 0.88rem;
+}
+
+.item ul {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+/* li 안에 들어 있는 ul만 선택 (한 단계 들여쓴 목록) */
+.item li ul {
+    padding-left: 1rem;
+    font-size: 0.88rem;
+    color: #5D7187;
+}
+
+/* 기술 스택 태그: inline 요소에 padding/border를 줘서 칸처럼 보이게 */
+.skill {
+    font-size: 0.82rem;
+    color: #414F5E;
+    background-color: #f5f9fe;
+    border: 1px solid #96B5D9;
+    border-radius: 0.4rem;      /* 모서리를 둥글게 */
+    padding: 0.15rem 0.65rem;
+    margin-right: 0.3rem;
+    line-height: 2.4;
+}
+
+.skill:hover {
+    background-color: #AED2FC;
+}
+
+.skill-group {
+    margin: 0 0 0.5rem 0;
+}
+
+.skill-label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #5D7187;
+    margin-right: 0.6rem;
+}
+
+/* ----- footer ----- */
+footer {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #96B5D9;
+    margin-top: 3rem;
+}
