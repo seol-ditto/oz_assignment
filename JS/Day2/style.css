@@ -1,0 +1,40 @@
+
+h1 {
+    color: #84A5B7;
+    text-align: center;
+    text-decoration-line: underline;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h3 {
+    text-align: center;
+}
+
+#window {
+    color: #88B4B8;
+    border: 1px solid #88B4B8;
+    padding: 6px;
+}
+
+#window:hover {
+    color: #8988B8;
+    text-decoration-line: underline;
+}
+
+#mac {
+    color: #8895B8;
+    border: 1px solid #8895B8;
+    padding: 6px;
+}
+
+#mac:hover {
+    color: #88B8AC;
+    text-decoration-line: underline;
+}
