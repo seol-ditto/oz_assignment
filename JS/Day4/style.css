@@ -1,0 +1,175 @@
+:root {
+    --navy-darkest: #163E69;
+    --navy-dark: #0D2640;
+    --navy: #28668C;
+    --blue: #3086E3;
+    --blue-light: #1D538C;
+
+    --bg: #EEF4F8;
+    --row-line: #E3ECF2;
+    --row-hover: #F4F8FB;
+    --up: #E34139;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 40px 16px;
+    background: var(--bg);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+    color: var(--navy-darkest);
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 32px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(18, 46, 64, 0.08);
+}
+
+h1 {
+    margin: 0 0 20px;
+    text-align: center;
+    font-size: 26px;
+    color: var(--navy-darkest);
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.tab {
+    padding: 8px 18px;
+    border: 1px solid var(--navy);
+    border-radius: 6px;
+    background: white;
+    color: var(--navy);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.tab:hover {
+    background: var(--row-hover);
+}
+
+.tab.active {
+    background: var(--navy-dark);
+    border-color: var(--navy-dark);
+    color: white;
+}
+
+#search {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 24px;
+    padding: 9px 12px;
+    border: 1px solid var(--row-line);
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+#search:focus {
+    outline: none;
+    border-color: var(--blue-light);
+    box-shadow: 0 0 0 3px rgba(66, 165, 227, 0.2);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th,
+td {
+    padding: 12px 20px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+th {
+    background: var(--navy-darkest);
+    color: white;
+    font-weight: 600;
+}
+
+th:first-child {
+    border-top-left-radius: 6px;
+}
+
+th:last-child {
+    border-top-right-radius: 6px;
+}
+
+td {
+    border-bottom: 1px solid var(--row-line);
+}
+
+tbody tr:hover {
+    background: var(--row-hover);
+}
+
+.symbol {
+    font-weight: bold;
+    color: var(--navy-dark);
+}
+
+.star {
+    width: 60px;
+    text-align: center;
+    cursor: pointer;
+    color: #B8C7D3;
+    font-size: 18px;
+    user-select: none;
+}
+
+th {
+    text-align: center;
+}
+
+.percent {
+    text-align: center;
+}
+
+td {
+    font-variant-numeric: tabular-nums;
+}
+
+.star.active {
+    color: var(--blue-light);
+}
+
+.up {
+    color: var(--up);
+    font-weight: bold;
+}
+
+.down {
+    color: var(--blue);
+    font-weight: bold;
+}
+
+td {
+    border-right: 1px solid #EEF0F2;
+}
+
+td:last-child {
+    border-right: none;
+}
+
+th {
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+th:last-child {
+    border-right: none;
+}
